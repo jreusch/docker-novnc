@@ -16,4 +16,4 @@ case $RUN_XTERM in
     ;;
 esac
 
-exec supervisord -c /app/supervisord.conf
+exec supervisord -n -c /app/supervisord.conf
