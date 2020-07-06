@@ -16,4 +16,11 @@ case $RUN_XTERM in
     ;;
 esac
 
-exec supervisord -n -c /app/supervisord.conf
+if [ -f /app/main.sh ]; then
+  supervisord -c /app/supervisord.conf
+  # if main programm is given disable xterm regadless of environment variable
+  rm -f /app/conf.d/xterm.conf
+  exec /app/main.sh
+else
+  exec supervisord -n -c /app/supervisord.conf
+fi
